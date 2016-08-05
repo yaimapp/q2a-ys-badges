@@ -18,6 +18,8 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 	exit;
 }
 
+	qa_register_plugin_module('module', 'qa-ys-badge-admin.php', 'qa_ys_badge_admin', 'Ys Badge Admin');
+
 /*
 	Omit PHP closing tag to help avoid accidental output
 */
