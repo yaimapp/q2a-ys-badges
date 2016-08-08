@@ -57,7 +57,7 @@ class ys_badge_db
 		);
 	}
 
-	public static function get_user_achivements($userid)
+	public static function get_user_achievements($userid)
 	{
 		$sql = 'SELECT user_id as uid,
 				first_visit as fv,

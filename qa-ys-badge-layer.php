@@ -20,11 +20,11 @@ class qa_html_theme_layer extends qa_html_theme_base {
 			return;
 		}
 
-		$ua = ys_badge_db::get_user_achivements($userid);
+		$ua = ys_badge_db::get_user_achievements($userid);
 		if (!isset($ua)) {
 			return;
 		}
-		
+
 	}
 
 	function head_custom()
