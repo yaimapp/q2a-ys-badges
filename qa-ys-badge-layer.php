@@ -9,6 +9,22 @@ class qa_html_theme_layer extends qa_html_theme_base {
 			return;
 		}
 
+		$userid = qa_get_logged_in_userid();
+
+		if (!$userid) {	// not logged in?
+			return;
+		}
+
+		if (ys_badge_db::is_first_visit($userid)) {
+			ys_badge_db::insert_first_visit($userid);
+			return;
+		}
+
+		$ua = ys_badge_db::get_user_achivements($userid);
+		if (!isset($ua)) {
+			return;
+		}
+		
 	}
 
 	function head_custom()
