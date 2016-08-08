@@ -10,9 +10,9 @@
 		'answerer' => 'Answerer',
 		'savior' => 'Savior',
 
-		'regular_desc' => 'Visit total in more than # days',
+		'regular_desc' => 'Visit total in more than # ^day^days',
 		'answerer_desc' => 'The first time you answer',
-		'savior_desc' => 'To answer the question of # days or more unanswered',
+		'savior_desc' => 'To answer the question of # ^day^days or more unanswered',
 
 		'bronze'=>'Bronze',
 		'silver'=>'Silver',

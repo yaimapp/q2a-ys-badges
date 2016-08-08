@@ -201,7 +201,7 @@ class qa_ys_badge_admin
 
 			$fields[] = array(
 				'label' => qa_lang('ys_badges/badge_admin_select_all'),
-				'tags' => 'onclick="var isx = this.checked; jQuery(\'.ys_badge-listing :checkbox\').prop(\'checked\',isx);"',
+				'tags' => 'onclick="var isx = this.checked; jQuery(\'.ys-badge-listing :checkbox\').prop(\'checked\',isx);"',
 				'value' => false,
 				'type' => 'checkbox',
 			);
@@ -213,14 +213,14 @@ class qa_ys_badge_admin
 				if(!qa_opt('ys_badge_'.$slug.'_name')) qa_opt('ys_badge_'.$slug.'_name',$badge_name);
 				$name = qa_opt('ys_badge_'.$slug.'_name');
 
-				$badge_desc = ys_badge_desc_replace($slug,qa_opt('badge_'.$slug.'_var'),true);
+				$badge_desc = ys_badge_desc_replace($slug,qa_opt('ys_badge_'.$slug.'_var'),true);
 
 				$level = ys_get_badge_level($info['level']);
 				$levels = $level['slug'];
 
 				$fields[] = array(
 						'type' => 'static',
-						'note' => '<table class="ys_badge-listing"><tr><td><input type="checkbox" name="ys_badge_'.$slug.'_enabled"'.(qa_opt('ys_badge_'.$slug.'_enabled') !== '0' ? ' checked':'').'></td><td><input type="text" name="ys_badge_'.$slug.'_edit" id="ys_badge_'.$slug.'_edit" style="display:none" size="16" onblur="badgeEdit(\''.$slug.'\',true)" value="'.$name.'"><span id="ys_badge_'.$slug.'_badge" class="ys_badge-'.$levels.'" onclick="ys_badgeEdit(\''.$slug.'\')" title="'.qa_lang('ys_badges/badge_admin_click_edit').'">'.$name.'</span></td><td>'.$badge_desc.'</td></tr></table>'
+						'note' => '<table class="ys-badge-listing"><tr><td><input type="checkbox" name="ys_badge_'.$slug.'_enabled"'.(qa_opt('ys_badge_'.$slug.'_enabled') !== '0' ? ' checked':'').'></td><td><input type="text" name="ys_badge_'.$slug.'_edit" id="ys_badge_'.$slug.'_edit" style="display:none" size="16" onblur="ys_badgeEdit(\''.$slug.'\',true)" value="'.$name.'"><span id="ys_badge_'.$slug.'_badge" class="ys-badge-'.$levels.'" onclick="ys_badgeEdit(\''.$slug.'\')" title="'.qa_lang('ys_badges/badge_admin_click_edit').'">'.$name.'</span></td><td>'.$badge_desc.'</td></tr></table>'
 				);
 			}
 

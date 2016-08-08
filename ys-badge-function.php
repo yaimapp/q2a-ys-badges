@@ -61,8 +61,8 @@ function ys_badge_desc_replace($slug, $var=null, $admin=false) {
 	// var replace
 
 	if($var) {
-		$desc = $admin?str_replace('#','<input type="text" name="ys_badge_'.$slug.'_var" size="4" value="'.$var.'">',$desc):str_replace('#',$var,$desc);
-		$desc = preg_replace('/\^([^^]+)\^(\S+)/',($var == 1?"$1":"$2"),$desc);
+		$desc = $admin ? str_replace('#','<input type="text" name="ys_badge_'.$slug.'_var" size="4" value="'.$var.'">',$desc) : str_replace('#',$var,$desc);
+		$desc = preg_replace('/\^([^^]+)\^(\S+)/', ($var == 1 ? "$1" : "$2"), $desc);
 	}
 
 	// other badge reference replace
