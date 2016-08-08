@@ -9,7 +9,7 @@ class qa_html_theme_layer extends qa_html_theme_base {
 			return;
 		}
 
-		$this->output('<style>',qa_opt('ys_badges_css'),'</style>');
+		$this->output('<style>', qa_opt('ys_badges_css'), '</style>');
 
 	}
 }

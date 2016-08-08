@@ -150,34 +150,60 @@ class qa_ys_badge_admin
 			qa_opt('ys_badge_active', (bool)qa_post_text('ys_badge_active_check'));
 
 			if (qa_opt('ys_badge_active')) {
+
+				qa_db_query_sub(
+					'CREATE TABLE IF NOT EXISTS ^ys_userbadges ('.
+						'id INT(11) NOT NULL AUTO_INCREMENT,'.
+						'awarded_at DATETIME NOT NULL,'.
+						'user_id INT(11) NOT NULL,'.
+						'notify TINYINT DEFAULT 0 NOT NULL,'.
+						'object_id INT(10),'.
+						'badge_slug VARCHAR (64) CHARACTER SET ascii DEFAULT \'\','.
+						'PRIMARY KEY (id)'.
+					') ENGINE=InnoDB DEFAULT CHARSET=utf8'
+				);
+
+				qa_db_query_sub(
+					'CREATE TABLE IF NOT EXISTS ^ys_achievements ('.
+						'user_id INT(11) UNIQUE NOT NULL,'.
+						'first_visit DATETIME,'.
+						'oldest_consec_visit DATETIME,'.
+						'longest_consec_visit INT(10),'.
+						'last_visit DATETIME,'.
+						'total_days_visited INT(10),'.
+						'questions_read INT(10),'.
+						'posts_edited INT(10)'.
+					') ENGINE=InnoDB DEFAULT CHARSET=utf8'
+				);
+
 				// set badge names, vars and states
 
 				foreach ($this->badges as $slug => $info) {
 					// update var
 
-					if(isset($info['var']) && qa_post_text('badge_'.$slug.'_var')) {
-						qa_opt('badge_'.$slug.'_var',qa_post_text('badge_'.$slug.'_var'));
+					if(isset($info['var']) && qa_post_text('ys_badge_'.$slug.'_var')) {
+						qa_opt('ys_badge_'.$slug.'_var',qa_post_text('ys_badge_'.$slug.'_var'));
 					}
 
 					// toggle activation
 
-					if((bool)qa_post_text('badge_'.$slug.'_enabled') === false) {
-						qa_opt('badge_'.$slug.'_enabled','0');
+					if((bool)qa_post_text('ys_badge_'.$slug.'_enabled') === false) {
+						qa_opt('ys_badge_'.$slug.'_enabled','0');
 					}
-					else qa_opt('badge_'.$slug.'_enabled','1');
+					else qa_opt('ys_badge_'.$slug.'_enabled','1');
 
 					// set custom names
 
-					if (qa_post_text('badge_'.$slug.'_edit') != qa_opt('badge_'.$slug.'_name')) {
-						qa_opt('badge_'.$slug.'_name',qa_post_text('badge_'.$slug.'_edit'));
-						$qa_lang_default['badges'][$slug] = qa_opt('badge_'.$slug.'_name');
+					if (qa_post_text('ys_badge_'.$slug.'_edit') != qa_opt('ys_badge_'.$slug.'_name')) {
+						qa_opt('ys_badge_'.$slug.'_name',qa_post_text('ys_badge_'.$slug.'_edit'));
+						$qa_lang_default['ys_badges'][$slug] = qa_opt('ys_badge_'.$slug.'_name');
 					}
 
 				}
 
 				// options
 
-				qa_opt('badges_css',qa_post_text('badges_css'));
+				qa_opt('ys_badges_css', qa_post_text('ys_badges_css'));
 			}
 			$ok = qa_lang('ys_badges/badge_admin_saved');
 		}
@@ -192,7 +218,7 @@ class qa_ys_badge_admin
 			'type' => 'checkbox',
 		);
 
-		if(qa_opt('badge_active')) {
+		if(qa_opt('ys_badge_active')) {
 
 			$fields[] = array(
 					'label' => qa_lang('ys_badges/active_badges').':',
