@@ -69,6 +69,7 @@ class ys_badge_db
 				WHERE user_id = #';
 		return qa_db_read_one_assoc(qa_db_query_sub($sql, $userid),true);
 	}
+	
 }
 
 /*

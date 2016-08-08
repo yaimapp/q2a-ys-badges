@@ -25,6 +25,23 @@ class qa_html_theme_layer extends qa_html_theme_base {
 			return;
 		}
 
+		$last_diff = ys_check_days_diff($ua['lv']);
+		$oldest_consec_diff = ys_check_days_diff($ua['ocv']) + 1;	// include the first day
+		$first_visit_diff = ys_check_days_diff($ua['fv']);
+
+		if ($last_diff < 0) {
+			return;
+		}
+
+		if ($last_diff < 2) {
+			if($oldest_consec_diff > $ua['lcv']) {
+				$ua['lcv'] = $oldest_consec_diff;
+				ys_badge_db::ys_update_longest_consec_visit($oldest_consec_diff,
+													$last_diff,
+													$userid);
+			}
+		}
+		qa_exit();
 	}
 
 	function head_custom()

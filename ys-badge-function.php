@@ -80,6 +80,17 @@ function ys_badge_desc_replace($slug, $var=null, $admin=false) {
 	return $desc;
 }
 
+function ys_check_days_diff($dest)
+{
+	$today = new Datetime();
+	$today->setTime(0,0,0);
+	$dest_date = new Datetime($dest);
+	$dest_date->setTime(0,0,0);
+	$interval = $today->diff($dest_date);
+	var_dump( $interval->days );
+	return $interval->days;
+}
+
 /*
 	Omit PHP closing tag to help avoid accidental output
 */
