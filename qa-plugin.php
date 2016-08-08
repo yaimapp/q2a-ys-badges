@@ -22,6 +22,8 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 	@define( 'YS_BADGES_DIR', dirname( __FILE__ ) );
 	@define( 'YS_BADGES_FOLDER', basename( dirname( __FILE__ ) ) );
 
+	require_once YS_BADGES_DIR . '/ys-badges.php';
+	require_once YS_BADGES_DIR . '/ys-badge-function.php';
 
 	// admin
 	qa_register_plugin_module('module', 'qa-ys-badge-admin.php', 'qa_ys_badge_admin', 'Ys Badge Admin');

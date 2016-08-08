@@ -1,8 +1,5 @@
 <?php
 
-require_once YS_BADGES_DIR . '/ys-badges.php';
-require_once YS_BADGES_DIR . '/ys-badge-function.php';
-
 class qa_ys_badge_admin
 {
 	private $badges;

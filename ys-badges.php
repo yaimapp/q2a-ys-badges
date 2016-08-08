@@ -8,9 +8,9 @@ function ys_get_badge_list()
 {
 	$badges = array();
 
-	$badegs['regular'] = array('var' => 10, 'level' => 1);
-	$badegs['answerer'] = array('level' => '1');
-	$badegs['savior'] = array('var' => 3, 'level' => 2);
+	$badges['regular'] = array('var' => 10, 'level' => 1);
+	$badges['answerer'] = array('level' => '1');
+	$badges['savior'] = array('var' => 3, 'level' => 2);
 
 	return $badges;
 }
