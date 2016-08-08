@@ -29,6 +29,8 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 	qa_register_plugin_module('module', 'qa-ys-badge-admin.php', 'qa_ys_badge_admin', 'Ys Badge Admin');
 	// languages
 	qa_register_plugin_phrases('qa-ys-badge-lang-*.php', 'ys_badges');
+	// layer
+	qa_register_plugin_layer('qa-ys-badge-layer.php', 'Ys Badge Layer');
 
 /*
 	Omit PHP closing tag to help avoid accidental output
