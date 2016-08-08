@@ -87,7 +87,6 @@ function ys_check_days_diff($dest)
 	$dest_date = new Datetime($dest);
 	$dest_date->setTime(0,0,0);
 	$interval = $today->diff($dest_date);
-	var_dump( $interval->days );
 	return $interval->days;
 }
 

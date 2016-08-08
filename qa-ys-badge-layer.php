@@ -36,12 +36,17 @@ class qa_html_theme_layer extends qa_html_theme_base {
 		if ($last_diff < 2) {
 			if($oldest_consec_diff > $ua['lcv']) {
 				$ua['lcv'] = $oldest_consec_diff;
-				ys_badge_db::ys_update_longest_consec_visit($oldest_consec_diff,
+				ys_badge_db::update_longest_consec_visit($oldest_consec_diff,
 													$last_diff,
 													$userid);
+			} else {
+				ys_badge_db::update_total_days_visited($last_diff, $userid);
 			}
+		} else {
+			// 2+ days, reset consecutive days due to lapse
+			ys_badge_db::update_oldest_consec_visit($userid);
 		}
-		qa_exit();
+		// ys_badge_award_check();
 	}
 
 	function head_custom()

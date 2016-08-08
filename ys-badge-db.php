@@ -52,7 +52,11 @@ class ys_badge_db
 	public static function insert_first_visit($userid)
 	{
 		qa_db_query_sub(
-			'INSERT INTO ^ys_achievements (user_id, first_visit, oldest_consec_visit, longest_consec_visit, last_visit, total_days_visited, questions_read, posts_edited) VALUES (#, NOW(), NOW(), #, NOW(), #, #, #)',
+			'INSERT INTO ^ys_achievements
+			 (user_id, first_visit, oldest_consec_visit,
+			 longest_consec_visit, last_visit, total_days_visited,
+			 questions_read, posts_edited)
+			 VALUES (#, NOW(), NOW(), #, NOW(), #, #, #)',
 			$userid, 1, 1, 0, 0
 		);
 	}
@@ -69,7 +73,41 @@ class ys_badge_db
 				WHERE user_id = #';
 		return qa_db_read_one_assoc(qa_db_query_sub($sql, $userid),true);
 	}
-	
+
+	public static function update_longest_consec_visit($oldest_consec_diff, $last_diff, $userid)
+	{
+		qa_db_query_sub(
+			'UPDATE ^ys_achievements
+			 SET last_visit = NOW(),
+				 longest_consec_visit = #,
+				 total_days_visited = total_days_visited + #
+			 WHERE user_id = #',
+			$oldest_consec_diff, $last_diff, $userid
+		);
+	}
+
+	public static function update_total_days_visited($last_diff, $userid)
+	{
+		qa_db_query_sub(
+			'UPDATE ^ys_achievements
+			 SET last_visit = NOW(),
+				 total_days_visited = total_days_visited + #
+			WHERE user_id = #',
+			$last_diff, $userid
+		);
+	}
+
+	public static function update_oldest_consec_visit($userid)
+	{
+		qa_db_query_sub(
+			'UPDATE ^ys_achievements
+			 SET last_visit = NOW(),
+				 oldest_consec_visit = NOW(),
+				 total_days_visited = total_days_visited + 1
+				 WHERE user_id = #',
+			$userid
+		);
+	}
 }
 
 /*
