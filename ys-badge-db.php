@@ -108,6 +108,72 @@ class ys_badge_db
 			$userid
 		);
 	}
+
+	public static function check_posts_number($uid, $type)
+	{
+		$count = qa_db_read_one_value(
+			qa_db_query_sub(
+				'SELECT count(*) FROM ^posts
+				 WHERE userid = #
+				 AND type = $',
+				$uid, $type
+			)
+		);
+		return $count;
+	}
+
+	public static function check_awarded_badges($badge_slug, $uid, $oid = NULL)
+	{
+		$sql = 'SELECT badge_slug FROM ^ys_userbadges
+				WHERE user_id = #
+				AND badge_slug = $';
+
+		if (!empty($oid)) {
+			$sql .= qa_db_apply_sub(' AND object_id = #',
+									array($oid));
+		}
+		return qa_db_read_one_value(
+			qa_db_query_sub($sql, $uid, $badge_slug),
+			true
+		);
+	}
+
+	public static function insert_badge_award($badge_slug, $notify, $uid, $oid = NULL)
+	{
+		qa_db_query_sub(
+			'INSERT INTO ^ys_userbadges (awarded_at, notify, object_id, user_id, badge_slug, id) '.
+			'VALUES (NOW(), #, #, #, #, 0)',
+			$notify, $oid, $uid, $badge_slug
+		);
+	}
+
+	public static function insert_eventlog($badge_slug, $uid, $oid = NULL)
+	{
+		$handle = qa_userid_to_handle($uid);
+		error_log($badge_slug.":".$handle);
+		qa_db_query_sub(
+			'INSERT INTO ^eventlog (datetime, ipaddress, userid, handle, cookieid, event, params) '.
+			'VALUES (NOW(), $, $, $, #, $, $)',
+			qa_remote_ip_address(), $uid, $handle, qa_cookie_get(), 'badge_awarded', 'badge_slug='.$badge_slug.($oid ? "\t".'postid='.$oid : '')
+		);
+	}
+
+	public static function get_single_post($postid = null)
+	{
+		return  qa_db_single_select(qa_db_full_post_selectspec(null, $postid));
+	}
+
+	public static function get_badge_to_notify($userid)
+	{
+		return qa_db_read_all_values(
+			qa_db_query_sub(
+				'SELECT badge_slug FROM ^ys_userbadges
+				 WHERE user_id = #
+				 AND notify >= 1',
+				$userid
+			)
+		);
+	}
 }
 
 /*

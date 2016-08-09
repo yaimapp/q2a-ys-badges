@@ -9,13 +9,13 @@ class ys_badge_event
 			switch ($event) {
 				// when a new question, answer or comment is created. The $params array contains full information about the new post, including its ID in $params['postid'] and textual content in $params['text'].
 				case 'q_post':
-					$this->question_post($event, $userid, $params);
+					$this->question_post($userid, $params);
 					break;
 				case 'a_post':
-					$this->answer_post($event, $userid, $params);
+					$this->answer_post($userid, $params);
 					break;
 				case 'c_post':
-					$this->comment_post($event, $userid, $params);
+					$this->comment_post($userid, $params);
 					break;
 
 				// when a question, answer or comment is modified. The $params array contains information about the post both before and after the change, e.g. $params['content'] and $params['oldcontent'].
@@ -23,6 +23,7 @@ class ys_badge_event
 					// $this->question_edit($event, $userid, $params);
 					break;
 				case 'a_edit':
+					$this->answer_post($userid, $params);
 					// $this->answer_edit($event, $userid, $params);
 					break;
 				case 'c_edit':
@@ -157,18 +158,29 @@ class ys_badge_event
 		}
 	}
 
-	private function question_post($event, $event_user, $params)
+	private function question_post($event_user, $params)
 	{
+		$postid = $params['postid'];
 
+		if ($event_user) {
+			$count = ys_badge_db::check_posts_number($event_user, $postid, 'Q');
+			// $badges = array('');
+			// ys_badge_db::badge_award_check($badges, $count, $event_user);
+		}
 	}
 
-	private function answer_post($event, $event_user, $params)
+	private function answer_post($userid, $params)
 	{
-
+		if ($userid) {
+			$count = ys_badge_db::check_posts_number($userid, 'A');
+			$badges = array('answerer');
+			ys_badge_award_check($badges, $count, $userid);
+			ys_check_answer_parent_post($params['parentid'], $params['postid'], $userid);
+		}
 	}
 
 
-	private function comment_post($event, $event_user, $params)
+	private function comment_post($event_user, $params)
 	{
 
 	}
