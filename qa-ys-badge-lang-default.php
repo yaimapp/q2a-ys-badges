@@ -22,6 +22,12 @@
 		'silver_desc'=>'Silver badges are awarded for extended participation. They are an accomplishment, and a sign of genuine participation.',
 		'gold_desc'=>'Gold Badges are awarded for extrordinary participation. Only long-term participation can earn you these. They are a sign of a truly valuable contribution!',
 
+		'badge_notify'=>'Congratulations!  You\'ve earned a badge ',
+		'badge_notify_multi_plural'=>'and # other badges!',
+		'badge_notify_multi_singular'=>'and 1 other badge!',
+		'badge_notify_profile_pre'=>'Check out ',
+		'badge_notify_profile'=>'your profile',
+		
 		'badge_admin_activate'=>'Activate badges',
 		'active_badges'=>'Active Badges',
 

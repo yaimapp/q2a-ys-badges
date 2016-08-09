@@ -174,6 +174,16 @@ class ys_badge_db
 			)
 		);
 	}
+
+	public static function remove_notification_flag($userid)
+	{
+		qa_db_query_sub(
+			'UPDATE ^ys_userbadges SET notify=0
+			 WHERE user_id = #
+			 AND notify >= 1',
+			$userid
+		);
+	}
 }
 
 /*
