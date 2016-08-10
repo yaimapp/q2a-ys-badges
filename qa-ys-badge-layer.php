@@ -9,6 +9,33 @@ class qa_html_theme_layer extends qa_html_theme_base {
 			return;
 		}
 
+
+		if ($this->template === 'user' &&
+			!qa_opt('ys_badge_admin_user_field_no_tab')) {
+
+			$handle = qa_request_part(1);
+			if(!isset($this->content['navigation']['sub'])) {
+				$this->content['navigation']['sub'] = array(
+					'profile' => array(
+						'url' => qa_path_html('user/'.$handle, null, qa_opt('site_url')),
+						'label' => $handle,
+						'selected' => !qa_get('tab')?true:false
+					),
+					'badges' => array(
+						'url' => qa_path_html('user/'.$handle, array('tab'=>'badges'), qa_opt('site_url')),
+						'label' => qa_lang('ys_badges/badges'),
+						'selected' => qa_get('tab') == 'badges' ? true : false
+					),
+				);
+			} else {
+				$this->content['navigation']['sub']['badges'] = array(
+					'url' => qa_path_html('user/'.$handle, array('tab'=>'badges'), qa_opt('site_url')),
+					'label' => qa_lang('ys_badges/badges'),
+					'selected' => qa_get('tab') == 'badges' ? true : false
+				);
+			}
+		}
+
 		$userid = qa_get_logged_in_userid();
 
 		if (!$userid) {	// not logged in?
