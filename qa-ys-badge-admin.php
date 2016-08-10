@@ -34,7 +34,7 @@ class qa_ys_badge_admin
 			case 'ys_badge_widget_data_max':
 				return 30;
 			case 'ys_badge_email_subject':
-				return '[^site_title]':
+				return '[^site_title]';
 			case 'ys_badge_email_body':
 				return 'Congratulations! You have earned a "^badge_name" badge from ^site_title ^if_post_text="for the following post:
 
