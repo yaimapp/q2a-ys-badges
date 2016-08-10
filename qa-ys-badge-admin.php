@@ -272,11 +272,138 @@ You may cancel these notices at any time by visiting your profile at the link ab
 			);
 
 			$fields[] = array(
+					'label' => qa_lang('ys_badges/notify_time').':',
+					'type' => 'number',
+					'value' => qa_opt('ys_badge_notify_time'),
+					'tags' => 'NAME="ys_badge_notify_time"',
+					'note' => '<em>'.qa_lang('ys_badges/notify_time_desc').'</em>',
+			);
+
+			$fields[] = array(
+				'type' => 'blank',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_admin_user_field'),
+				'tags' => 'NAME="ys_badge_admin_user_field"',
+				'value' => (bool)qa_opt('ys_badge_admin_user_field'),
+				'type' => 'checkbox',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_admin_user_field_no_tab'),
+				'tags' => 'NAME="ys_badge_admin_user_field_no_tab"',
+				'value' => (bool)qa_opt('ys_badge_admin_user_field_no_tab'),
+				'type' => 'checkbox',
+			);
+
+			$fields[] = array(
+				'type' => 'blank',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_show_source_posts'),
+				'tags' => 'NAME="ys_badge_show_source_posts"',
+				'value' => (bool)qa_opt('ys_badge_show_source_posts'),
+				'type' => 'checkbox',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_show_source_users'),
+				'tags' => 'NAME="ys_badge_show_source_users"',
+				'value' => (bool)qa_opt('ys_badge_show_source_users'),
+				'type' => 'checkbox',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_admin_user_widget'),
+				'tags' => 'NAME="ys_badge_admin_user_widget"',
+				'value' => (bool)qa_opt('ys_badge_admin_user_widget'),
+				'type' => 'checkbox',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_admin_user_widget_q_item'),
+				'tags' => 'NAME="ys_badge_admin_user_widget_q_item"',
+				'value' => (bool)qa_opt('ys_badge_admin_user_widget_q_item'),
+				'type' => 'checkbox',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_admin_loggedin_widget'),
+				'tags' => 'NAME="ys_badge_admin_loggedin_widget"',
+				'value' => (bool)qa_opt('ys_badge_admin_loggedin_widget'),
+				'type' => 'checkbox',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_show_users_badges'),
+				'tags' => 'NAME="ys_badge_show_users_badges"',
+				'value' => (bool)qa_opt('ys_badge_show_users_badges'),
+				'type' => 'checkbox',
+			);
+			if (qa_clicked('ys_badge_trigger_notify')) {
+				$fields['test-notify'] = 1;
+			}
+
+			$fields[] = array(
 				'label' => 'Ys Badge css stylesheet',
 				'tags' => 'NAME="ys_badges_css"',
 				'value' => qa_opt('ys_badges_css'),
 				'rows' => 20,
 				'type' => 'textarea',
+			);
+
+			$fields[] = array(
+				'type' => 'blank',
+			);
+
+			$fields[] = array(
+					'label' => qa_lang('ys_badges/widget_list_max').':',
+					'type' => 'number',
+					'value' => qa_opt('ys_badge_widget_list_max'),
+					'tags' => 'NAME="ys_badge_widget_list_max"',
+			);
+
+			$fields[] = array(
+					'label' => qa_lang('ys_badges/widget_date_max').':',
+					'type' => 'number',
+					'value' => qa_opt('ys_badge_widget_date_max'),
+					'tags' => 'NAME="ys_badge_widget_date_max"',
+			);
+			$fields[] = array(
+				'type' => 'blank',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_email_notify'),
+				'tags' => 'NAME="ys_badge_email_notify" onclick="if(this.checked) jQuery(\'#badge_email_container\').fadeIn(); else jQuery(\'#badge_email_container\').fadeOut();"',
+				'value' => (bool)qa_opt('ys_badge_email_notify'),
+				'type' => 'checkbox',
+				'note' => '<table id="ys_badge_email_container" style="display:'.(qa_opt('ys_badge_email_notify')?'block':'none').'"><tr><td>',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_email_notify_on'),
+				'tags' => 'NAME="ys_badge_email_notify_on" id="ys_badge_email_notify_on"',
+				'value' => (bool)qa_opt('ys_badge_email_notify_on'),
+				'type' => 'checkbox',
+			);
+
+			$fields[] = array(
+				'label' => qa_lang('ys_badges/badge_email_subject'),
+				'tags' => 'NAME="ys_badge_email_subject" id="ys_badge_email_subject"',
+				'value' => qa_opt('ys_badge_email_subject'),
+				'type' => 'text',
+			);
+
+			$fields[] = array(
+				'label' =>  qa_lang('ys_badges/badge_email_body'),
+				'tags' => 'name="ys_badge_email_body" id="ys_badge_email_body"',
+				'value' => qa_opt('ys_badge_email_body'),
+				'type' => 'textarea',
+				'rows' => 20,
+				'note' => 'Available replacement text:<br/><br/><i>^site_title<br/>^handle<br/>^email<br/>^open<br/>^close<br/>^badge_name<br/>^post_title<br/>^post_url<br/>^profile_url<br/>^site_url<br/>^if_post_text="text"</i></td></tr></table>',
 			);
 
 			$fields[] = array(
