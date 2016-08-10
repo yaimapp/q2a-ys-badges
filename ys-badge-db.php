@@ -199,7 +199,7 @@ class ys_badge_db
 
 	public static function get_binary_title($postid)
 	{
-		return $title = qa_db_read_one_value(
+		return qa_db_read_one_value(
 			qa_db_query_sub(
 				'SELECT BINARY title as title
 				FROM ^posts
@@ -207,6 +207,15 @@ class ys_badge_db
 				$postid
 			),
 			true
+		);
+	}
+
+	public static function get_all_badges()
+	{
+		return qa_db_read_all_assoc(
+			qa_db_query_sub(
+				'SELECT user_id, badge_slug  FROM ^ys_userbadges'
+			)
 		);
 	}
 }

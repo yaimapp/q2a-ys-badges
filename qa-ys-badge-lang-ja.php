@@ -30,8 +30,8 @@
 
 		'badge_list_pre'=>'利用可能なバッチリスト:',
 		'awarded'=>'獲得',
-		'awarded_total'=>'獲得合計',
-		'badges_total'=>'総バッチ',
+		'awarded_total'=>'獲得合計数：',
+		'badges_total'=>'バッチ総数：',
 
 		'badge_notify'=>'おめでとうございます！  バッチを獲得しました！ ',
 		'badge_notify_multi_plural'=>'とほかに # 個のバッチを！',

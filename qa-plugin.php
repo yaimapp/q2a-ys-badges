@@ -26,14 +26,17 @@ if (!defined('QA_VERSION')) { // don't allow this page to be requested directly 
 	require_once YS_BADGES_DIR . '/ys-badge-function.php';
 	require_once YS_BADGES_DIR . '/ys-badge-db.php';
 
+	// event
+	qa_register_plugin_module('event', 'qa-ys-badge-event.php','ys_badge_event','Ys Badge Event');
 	// admin
 	qa_register_plugin_module('module', 'qa-ys-badge-admin.php', 'qa_ys_badge_admin', 'Ys Badge Admin');
+	// page
+	qa_register_plugin_module('page', 'qa-ys-badge-page.php', 'qa_ys_badge_page', 'Ys Badges');
+
 	// languages
 	qa_register_plugin_phrases('qa-ys-badge-lang-*.php', 'ys_badges');
 	// layer
 	qa_register_plugin_layer('qa-ys-badge-layer.php', 'Ys Badge Layer');
-	// event
-	qa_register_plugin_module('event', 'qa-ys-badge-event.php','ys_badge_event','Ys Badge Event');
 
 /*
 	Omit PHP closing tag to help avoid accidental output
