@@ -25,6 +25,27 @@ class qa_ys_badge_admin
 				return @$this->badges[$slug]['var'];
 			case 'ys_badge_'.$slug.'_enabled':
 				return '0';
+			case 'ys_custom_badges':
+				return true;
+			case 'ys_notify_time':
+				return 0;
+			case 'ys_badge_widget_list_max':
+				return 5;
+			case 'ys_badge_widget_data_max':
+				return 30;
+			case 'ys_badge_email_subject':
+				return '[^site_title]':
+			case 'ys_badge_email_body':
+				return 'Congratulations! You have earned a "^badge_name" badge from ^site_title ^if_post_text="for the following post:
+
+^post_title
+^post_url"
+
+Please log in and visit your profile:
+
+^profile_url
+
+You may cancel these notices at any time by visiting your profile at the link above.';
 			case 'ys_badges_css':
 				return '.notify-container {
 	left: 0;
@@ -145,7 +166,6 @@ class qa_ys_badge_admin
 	{
 		$ok = null;
 
-
 		if(qa_clicked('ys_badge_save_settings')) {
 			qa_opt('ys_badge_active', (bool)qa_post_text('ys_badge_active_check'));
 
@@ -180,6 +200,25 @@ class qa_ys_badge_admin
 				}
 
 				// options
+
+				qa_opt('ys_badge_notify_time', (int)qa_post_text('ys_badge_notify_time'));
+				qa_opt('ys_badge_show_users_badges', (bool)qa_post_text('ys_badge_show_users_badges'));
+				qa_opt('ys_badge_show_source_posts', (bool)qa_post('ys_badge_show_source_posts'));
+				qa_opt('ys_badge_show_source_users',(bool)qa_post_text('ys_badge_show_source_users'));
+
+				qa_opt('ys_badge_admin_user_widget',(bool)qa_post_text('ys_badge_admin_user_widget'));
+				qa_opt('ys_badge_admin_loggedin_widget',(bool)qa_post_text('ys_badge_admin_loggedin_widget'));
+				qa_opt('ys_badge_admin_user_widget_q_item',(bool)qa_post_text('ys_badge_admin_user_widget_q_item'));
+				qa_opt('ys_badge_admin_user_field',(bool)qa_post_text('ys_badge_admin_user_field'));
+				qa_opt('ys_badge_admin_user_field_no_tab',(bool)qa_post_text('ys_badge_admin_user_field_no_tab'));
+
+				qa_opt('ys_badge_widget_date_max',(int)qa_post_text('ys_badge_widget_date_max'));
+				qa_opt('ys_badge_widget_list_max',(int)qa_post_text('ys_badge_widget_list_max'));
+
+				qa_opt('ys_badge_email_notify',(bool)qa_post_text('ys_badge_email_notify'));
+				qa_opt('ys_badge_email_notify_on',(bool)qa_post_text('ys_badge_email_notify_on'));
+				qa_opt('ys_badge_email_subject',qa_post_text('ys_badge_email_subject'));
+				qa_opt('ys_badge_email_body',qa_post_text('ys_badge_email_body'));
 
 				qa_opt('ys_badges_css', qa_post_text('ys_badges_css'));
 			}
