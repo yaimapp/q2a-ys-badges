@@ -184,6 +184,31 @@ class ys_badge_db
 			$userid
 		);
 	}
+
+	public static function get_badge_slug_and_oid($userid)
+	{
+		return qa_db_read_all_assoc(
+			qa_db_query_sub(
+				'SELECT badge_slug as slug, object_id AS oid
+				FROM ^ys_userbadges
+				WHERE user_id = #',
+				$userid
+			)
+		);
+	}
+
+	public static function get_binary_title($postid)
+	{
+		return $title = qa_db_read_one_value(
+			qa_db_query_sub(
+				'SELECT BINARY title as title
+				FROM ^posts
+				WHERE postid = #',
+				$postid
+			),
+			true
+		);
+	}
 }
 
 /*

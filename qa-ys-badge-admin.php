@@ -203,7 +203,7 @@ You may cancel these notices at any time by visiting your profile at the link ab
 
 				qa_opt('ys_badge_notify_time', (int)qa_post_text('ys_badge_notify_time'));
 				qa_opt('ys_badge_show_users_badges', (bool)qa_post_text('ys_badge_show_users_badges'));
-				qa_opt('ys_badge_show_source_posts', (bool)qa_post('ys_badge_show_source_posts'));
+				qa_opt('ys_badge_show_source_posts', (bool)qa_post_text('ys_badge_show_source_posts'));
 				qa_opt('ys_badge_show_source_users',(bool)qa_post_text('ys_badge_show_source_users'));
 
 				qa_opt('ys_badge_admin_user_widget',(bool)qa_post_text('ys_badge_admin_user_widget'));

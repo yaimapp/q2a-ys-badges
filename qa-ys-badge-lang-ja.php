@@ -61,7 +61,7 @@
 		'badge_reset_names'=>'名前をリセット',
 		'badge_reset_names_desc'=>'上記の入力で名前をリセット',
 
-		'notify_time'=>'何秒後に通知する',
+		'notify_time'=>'何秒後に通知を非表示にする',
 		'notify_time_desc'=>'バッチの通知を非表示にする秒数 (0 = off)',
 		'badge_trigger_notify'=>'通知のテスト',
 		'badge_trigger_notify_desc'=>'サンプル通知を表示',

@@ -59,9 +59,71 @@ class qa_html_theme_layer extends qa_html_theme_base {
 			$this->badge_notify();
 		}
 
+		if ($this->request == 'admin/plugins' && qa_get_logged_in_level() >= QA_USER_LEVEL_ADMIN) {
+			$this->output("
+			<script>".(qa_opt('ys_badge_notify_time') != '0'?"
+				jQuery('document').ready(function() { jQuery('.notify-container').delay(".((int)qa_opt('ys_badge_notify_time')*1000).").slideUp('fast'); });":"")."
+				function ys_badgeEdit(slug,end) {
+					if(end) {
+						jQuery('#ys_badge_'+slug+'_edit').hide();
+						jQuery('#ys_badge_'+slug+'_badge').show();
+						jQuery('#ys_badge_'+slug+'_badge').html(jQuery('#ys_badge_'+slug+'_edit').val());
+						return;
+					}
+					jQuery('#ys_badge_'+slug+'_badge').hide();
+					jQuery('#ys_badge_'+slug+'_edit').show();
+					jQuery('#ys_badge_'+slug+'_edit').focus();
+				}
+			</script>");
+		} elseif (isset($this->badge_notice)) {
+			$this->output("
+			<script>".(qa_opt('ys_badge_notify_time') != '0'?"
+				jQuery('document').ready(function() { jQuery('.notify-container').delay(".((int)qa_opt('ys_badge_notify_time')*1000).").slideUp('fast'); });":"")."
+			</script>");
+		}
 		$this->output('<style>', qa_opt('ys_badges_css'), '</style>');
 
 	}
+
+	function body_prefix()
+	{
+		qa_html_theme_base::body_prefix();
+		if(isset($this->badge_notice)) {
+			$this->output($this->badge_notice);
+		}
+	}
+
+	function body_suffix()
+	{
+		qa_html_theme_base::body_suffix();
+
+		if (qa_opt('ys_badge_active')) {
+			if(isset($this->content['test-notify'])) {
+				$this->trigger_notify('Badge Tester');
+			 }
+		}
+	}
+
+	function main_parts($content)
+	{
+		if (qa_opt('ys_badge_active') &&
+		    $this->template === 'user' &&
+			qa_opt('ys_badge_admin_user_field') &&
+			(qa_get('tab') === 'badges' || qa_opt('ys_badge_admin_user_field_no_tab')) && isset($content['raw']['userid'])) {
+				$userid = $content['raw']['userid'];
+				if(!qa_opt('ys_badge_admin_user_field_no_tab')) {
+					foreach($content as $i => $v) {
+						if(strpos($i,'form') === 0) {
+							unset($content[$i]);
+						}
+					}
+				}
+				$content['form-badges-list'] = ys_badge_plugin_user_form($userid);
+		}
+
+		qa_html_theme_base::main_parts($content);
+
+		}
 
 	function badge_notify() {
 		$userid = qa_get_logged_in_userid();
